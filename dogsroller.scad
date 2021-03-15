@@ -1,12 +1,12 @@
 // 2021 (c) KAKL
 // protection against beating of dogs legs
 
-$fn = 50;
+$fn = 30;
 
 inner = 36;
 cheight=50;
-tl = 14;
-screw = 3.6;
+tl = 4;
+screw = 4.0;
 size =  inner + tl;
 packy = size + 20;
 spike_length=size/3;
@@ -22,16 +22,14 @@ module Spike()
 
 module ACylinder()
 {
-    cylinder(d=size, h=cheight, $fn=300);
+    cylinder(d=size, h=cheight);
     Spikes();
 }
 
 
 module Spikes()
 {
-    
-    d=5;
-    nx=20;
+    nx=10;
     ny=3;
 
 
@@ -55,7 +53,7 @@ module Spikes()
 
 module hole()
 {
-    rotate([0,90,0]) cylinder(d=screw, h=size * 2, center = true, $fn=100);
+    rotate([0,90,0]) cylinder(d=screw, h=size * 2, center = true);
 }
 
 difference()
@@ -75,16 +73,18 @@ difference()
     cylinder(d=inner, h=cheight+10);
     translate([0,-size-1,-1]) cube(size = [size,size*3,cheight+10], center = false);
 
-    difference()
+    translate([0,0,0.1]) difference()
     {
         translate([-100,-100,cheight-10]) cube(size = [200,200,10], center = false);
         rotate_extrude() translate([size/2,cheight-10,0]) circle(10);
         translate([-100,-100,cheight-10-10]) cube(size = [200,200,10], center = false);
     };
+    /*
     difference()
     {
         cylinder(d=packy*2, h=cheight+10);
         cylinder(d=packy-3, h=cheight+10);
     };
+    */
 };
 
